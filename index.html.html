@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neo - Cybernetic Showcase</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-pink: #ff2a6d;
+            --neon-blue: #05d9e8;
+            --neon-purple: #d300c5;
+            --dark-bg: #0d0221;
+        }
+
+
+    body {
+        font-family: 'Rajdhani', sans-serif;
+        background-color: var(--dark-bg);
+        color: white;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+    }
+    
+    h1, h2, h3 {
+        font-family: 'Orbitron', sans-serif;
+        text-transform: uppercase;
+    }
+    
+    .neon-text {
+        text-shadow: 0 0 5px var(--neon-pink), 0 0 10px var(--neon-pink);
+    }
+    
+    .neon-border {
+        box-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue), inset 0 0 5px var(--neon-blue);
+    }
+    
+    .neon-glow {
+        animation: glow 2s infinite alternate;
+    }
+    
+    @keyframes glow {
+        from {
+            text-shadow: 0 0 5px var(--neon-pink), 0 0 10px var(--neon-pink);
+        }
+        to {
+            text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink), 0 0 30px var(--neon-purple);
+        }
+    }
+    
+    .scan-line {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, 
+            rgba(5, 217, 232, 0) 0%, 
+            rgba(5, 217, 232, 0.1) 50%, 
+            rgba(5, 217, 232, 0) 100%);
+        background-size: 100% 8px;
+        pointer-events: none;
+        animation: scan 8s linear infinite;
+        z-index: 10;
+    }
+    
+    @keyframes scan {
+        0% {
+            background-position: 0 -100px;
+        }
+        100% {
+            background-position: 0 100vh;
+        }
+    }
+    
+    .grid-pattern {
+        background: 
+            linear-gradient(rgba(5, 217, 232, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(5, 217, 232, 0.05) 1px, transparent 1px);
+        background-size: 20px 20px;
+    }
+    
+    .neo-enter {
+        animation: neoEnter 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+    
+    .neo-scan {
+        animation: neoScan 2s ease-in-out forwards;
+    }
+    
+    .neo-exit {
+        animation: neoExit 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards;
+    }
+    
+    @keyframes neoEnter {
+        0% {
+            transform: translateX(100vw);
+        }
+        70% {
+            transform: translateX(-5%);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+    
+    @keyframes neoScan {
+        0% {
+            transform: rotateY(0deg);
+        }
+        25% {
+            transform: rotateY(30deg);
+        }
+        50% {
+            transform: rotateY(-30deg);
+        }
+        75% {
+            transform: rotateY(15deg);
+        }
+        100% {
+            transform: rotateY(0deg);
+        }
+    }
+    
+    @keyframes neoExit {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-100vw);
+        }
+    }
+    
+    .section {
+        min-height: 100vh;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .cyber-btn {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s;
+    }
+    
+    .cyber-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0 15px var(--neon-blue);
+    }
+    
+    .cyber-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(5, 217, 232, 0.4), transparent);
+        transition: all 0.5s;
+    }
+    
+    .cyber-btn:hover::before {
+        left: 100%;
+    }
+    
+    .pulse {
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0% {
+            opacity: 0.6;
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0.6;
+        }
+    }
+    
+    .terminal {
+        font-family: 'Courier New', monospace;
+        background-color: rgba(0, 0, 0, 0.7);
+        border: 1px solid var(--neon-blue);
+        border-radius: 5px;
+        padding: 15px;
+        position: relative;
+    }
+    
+    .terminal::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 15px;
+        background: linear-gradient(90deg, 
+            var(--neon-pink) 0%, 
+            var(--neon-purple) 50%, 
+            var(--neon-blue) 100%);
+        border-radius: 5px 5px 0 0;
+    }
+    
+    .terminal-cursor {
+        animation: blink 1s infinite;
+    }
+    
+    @keyframes blink {
+        0%, 100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+        }
+    }
+    
+    .progress-bar {
+        height: 6px;
+        background: linear-gradient(90deg, 
+            var(--neon-pink) 0%, 
+            var(--neon-purple) 50%, 
+            var(--neon-blue) 100%);
+        animation: progress 2s ease-in-out infinite;
+        background-size: 200% 100%;
+    }
+    
+    @keyframes progress {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+</style>
+
+
+</head>
+<body class="grid-pattern">
+    <!-- Scan line effect -->
+    <div class="scan-line"></div>
+
+
+<!-- Audio element for background music -->
+<audio id="bgMusic" loop>
+    <source src="https://assets.mixkit.co/sfx/preview/mixkit-tech-house-vibes-130.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Music toggle button -->
+<button id="musicToggle" class="fixed bottom-6 right-6 z-50 bg-black/50 text-neon-blue p-3 rounded-full neon-border hover:bg-neon-blue hover:text-black transition-all duration-300">
+    <i class="fas fa-music text-xl"></i>
+</button>
+
+<!-- Navigation -->
+<nav class="fixed top-0 left-0 right-0 z-40 bg-black/50 backdrop-blur-md border-b border-neon-blue/20">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#" class="text-2xl font-bold neon-text">NΞO</a>
+        <div class="hidden md:flex space-x-8">
+            <a href="#home" class="text-neon-blue hover:text-neon-pink transition-all">HOME</a>
+            <a href="#about" class="text-neon-blue hover:text-neon-pink transition-all">ABOUT</a>
+            <a href="#perks" class="text-neon-blue hover:text-neon-pink transition-all">PERKS</a>
+            <a href="#tech" class="text-neon-blue hover:text-neon-pink transition-all">TECH</a>
+            <a href="#preview" class="text-neon-blue hover:text-neon-pink transition-all">PREVIEW</a>
+        </div>
+        <button class="md:hidden text-neon-blue">
+            <i class="fas fa-bars text-2xl"></i>
+        </button>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="home" class="section flex items-center justify-center relative">
+    <div class="absolute inset-0 bg-gradient-to-b from-neon-blue/10 to-neon-purple/5 opacity-30"></div>
+    <div class="container mx-auto px-6 z-20 text-center">
+        <h1 class="text-6xl md:text-8xl font-bold mb-6 neon-glow">NΞO</h1>
+        <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-neon-blue">The next generation of autonomous cybernetic intelligence</p>
+        <div class="flex justify-center space-x-4">
+            <a href="#about" class="cyber-btn px-8 py-3 bg-neon-blue text-black font-bold rounded-md">EXPLORE</a>
+            <a href="#preview" class="cyber-btn px-8 py-3 border-2 border-neon-blue text-neon-blue font-bold rounded-md">DEMO</a>
+        </div>
+    </div>
+    
+    <!-- Robot placeholder (will be animated in) -->
+    <div id="neoRobot" class="hidden md:block absolute left-1/2 -translate-x-1/2 bottom-20 w-64 h-64 bg-contain bg-no-repeat bg-center z-30">
+        <img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png" alt="Neo Robot" class="w-full h-full object-contain">
+    </div>
+    
+    <!-- Scrolling indicator -->
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center">
+        <span class="text-neon-blue mb-2">SCROLL</span>
+        <div class="w-px h-10 bg-gradient-to-t from-neon-blue to-transparent"></div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="section py-20 relative">
+    <div class="container mx-auto px-6">
+        <h2 class="text-4xl md:text-5xl font-bold mb-16 text-center neon-text">ABOUT <span class="text-neon-blue">NΞO</span></h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="terminal">
+                <div class="mb-4">
+                    <span class="text-neon-pink">user@cyberterminal:~$</span> <span class="text-neon-blue">neo --about</span>
+                </div>
+                <div class="text-gray-300">
+                    <p>> INITIALIZING NΞO PROFILE...</p>
+                    <p>> LOADING CYBERNETIC SPECS...</p>
+                    <p class="my-4">NΞO v4.2.0 (Next-gen Evolutionary Operator)</p>
+                    <p>Manufacturer: Curioquill</p
+                    <p>Primary Function: A robo companion</p>
+                     <p>Processing Power: 1.5 GHz</p>
+                    <p>Energy Source: 12V Li-ion battery pack</p>
+                    <p class="mt-4">> PROFILE LOAD COMPLETE<span class="terminal-cursor">_</span></p>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-2xl font-bold mb-4 text-neon-blue">THE Robo companion</h3>
+                <p class="mb-6 text-gray-300">NΞO represents that a machine can be more than a friend </p>
+                
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-neon-pink">Cognitive Processing</span>
+                            <span class="text-neon-blue">98%</span>
+                        </div>
+                        <div class="w-full bg-gray-800 rounded-full h-2.5">
+                            <div class="progress-bar h-2.5 rounded-full" style="width: 98%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-neon-pink">Emulation Accuracy</span>
+                            <span class="text-neon-blue">95%</span>
+                        </div>
+                        <div class="w-full bg-gray-800 rounded-full h-2.5">
+                            <div class="progress-bar h-2.5 rounded-full" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-neon-pink">Physical Dexterity</span>
+                            <span class="text-neon-blue">92%</span>
+                        </div>
+                        <div class="w-full bg-gray-800 rounded-full h-2.5">
+                            <div class="progress-bar h-2.5 rounded-full" style="width: 92%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Perks Section -->
+<section id="perks" class="section py-20 relative">
+    <div class="absolute inset-0 bg-gradient-to-br from-neon-purple/10 to-neon-blue/10 opacity-20"></div>
+    <div class="container mx-auto px-6 relative z-10">
+        <h2 class="text-4xl md:text-5xl font-bold mb-16 text-center neon-text">NΞO <span class="text-neon-blue">PERKS</span></h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Perk 1 -->
+            <div class="bg-black/50 p-8 rounded-lg border border-neon-blue/20 hover:border-neon-blue/50 transition-all group">
+                <div class="text-neon-blue text-4xl mb-4 group-hover:text-neon-pink transition-all">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-neon-blue">Adaptive Intelligence</h3>
+                <p class="text-gray-300">NΞO's AI is based on open source Ollama  NΞO runs on the powerful open-source Ollama framework, enabling real-time learning and continuous upgrades that enhance its decision-making and adaptability.</p>
+            </div>
+            
+            <!-- Perk 2 -->
+            <div class="bg-black/50 p-8 rounded-lg border border-neon-blue/20 hover:border-neon-blue/50 transition-all group">
+                <div class="text-neon-blue text-4xl mb-4 group-hover:text-neon-pink transition-all">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3 class="text-2xl font-bold mth its cold fusion micrb-3 text-neon-blue">Power supply</h3>
+                <p class="text-gray-300">Powered by a compact 12V Li-ion 18650 battery pack with built-in BMS, NΞO delivers reliable performance and extended runtime</p>
+            </div>
+            
+            <!-- Perk 3 -->
+            <div class="bg-black/50 p-8 rounded-lg border border-neon-blue/20 hover:border-neon-blue/50 transition-all group">
+                <div class="text-neon-blue text-4xl mb-4 group-hover:text-neon-pink transition-all">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-neon-blue"> Multi-Language Voice Responses</h3>
+                <p class="text-gray-300">NΞO responds fluently in English, Hindi, and Marathi, making conversations natural and accessible across diverse users..</p>
+            </div>
+            
+            <!-- Perk 4 -->
+            <div class="bg-black/50 p-8 rounded-lg border border-neon-blue/20 hover:border-neon-blue/50 transition-all group">
+                <div class="text-neon-blue text-4xl mb-4 group-hover:text-neon-pink transition-all">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-neon-blue">Smart Call Assistant</h3>
+                <p class="text-gray-300"> NΞO connects to your phone via Bluetooth and can automatically answer calls with a personalized voice message when you're unavailable.</p>
+            </div>
+            
+            <!-- Perk 5 -->
+            <div class="bg-black/50 p-8 rounded-lg border border-neon-blue/20 hover:border-neon-blue/50 transition-all group">
+                <div class="text-neon-blue text-4xl mb-4 group-hover:text-neon-pink transition-all">
+                    <i class="fas fa-network-wired"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-neon-blue">Real-Time Remote Control</h3>
+                <p class="text-gray-300">NΞO can be controlled in real-time via a custom Android app, offering seamless WiFi connectivity, responsive movement, and voice communication from anywhere.</p>
+            </div>
+            
+            <!-- Perk 6 -->
+            <div class="bg-black/50 p-8 rounded-lg border border-neon-blue/20 hover:border-neon-blue/50 transition-all group">
+                <div class="text-neon-blue text-4xl mb-4 group-hover:text-neon-pink transition-all">
+                    <i class="fas fa-eye"></i>
+                    <h3 class="text-2xl font-bold mb-3 text-neon-blue">Voice Synthesis & Recognition</h3>
+                    <p class="text-gray-300">Neo can understand and respond to voice commands with high precision using advanced voice recognition. Its voice synthesis engine allows it to speak fluently in multiple languages, delivering responses in a natural and human-like tone. Whether issuing a command or holding a conversation, Neo listens, understands, and speaks like a true digital companion.</p>
+                </div>
+        </div>
+    </div>
+</section>
+
+<!-- Tech Stack Section -->
+<section id="tech" class="section py-20 relative">
+    <div class="container mx-auto px-6">
+        <h2 class="text-4xl md:text-5xl font-bold mb-16 text-center neon-text">TECH <span class="text-neon-blue">STACK</span></h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h3 class="text-2xl font-bold mb-6 text-neon-blue">CUTTING-EDGE CYBERNETICS</h3>
+                
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <div class="text-neon-blue text-xl mr-4 mt-1">
+                            <i class="fas fa-microchip"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-neon-pink mb-2">Rasberry Pi 2w</h4>
+                            <p class="text-gray-300">Quad-core 1GHz ARM Cortex-A53 processor delivering efficient real-time computation and decision-making in a compact, energy-saving form.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="text-neon-blue text-xl mr-4 mt-1">
+                            <i class="fas fa-atom"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-neon-pink mb-2"></h4>
+                            <p class="text-gray-300"></p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="text-neon-blue text-xl mr-4 mt-1">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-neon-pink mb-2"></h4>
+                            <p class="text-gray-300">.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="relative">
+                <div class="terminal p-0 overflow-hidden">
+                    <div class="p-4">
+                        <div class="flex space-x-2 mb-4">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <div class="text-gray-300 font-mono text-sm">
+                            <p class="text-neon-pink">neo@quantum-core:~$ system --status</p>
+                            <p class="my-2">> SYSTEM STATUS: <span class="text-green-500">OPTIMAL</span></p>
+                            <p>> PROCESSOR LOAD: 25%</p>
+                            <p>> MEMORY USAGE: 160GB/256GB</p>
+                            <p>> ENERGY OUTPUT: 220W (stable)</p>
+                            <p>- Modular AI cores</p>
+                            <p>- Real time decision-making</p>
+                            <p>- Multilingual interaction system</p>
+                            <p>- Autonimas navigation suite</p>
+                            <p>- Voice sysnthesis and recognition</p>
+                            <p class="mt-4">> LAST UPDATE: 0.002s ago</p>
+                            <p class="text-neon-pink">neo@quantum-core:~$ <span class="terminal-cursor">_</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 3D Model Preview Section -->
+<section id="preview" class="section py-20 relative">
+    <div class="absolute inset-0 bg-gradient-to-b from-neon-blue/10 to-neon-purple/10 opacity-30"></div>
+    <div class="container mx-auto px-6 relative z-10">
+        <h2 class="text-4xl md:text-5xl font-bold mb-16 text-center neon-text">3D <span class="text-neon-blue">PREVIEW</span></h2>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="bg-black/50 border border-neon-blue/20 rounded-lg p-8 h-full">
+                <h3 class="text-2xl font-bold mb-6 text-neon-blue">INTERACT WITH NΞO</h3>
+                <p class="text-gray-300 mb-8">Explore NΞO's full capabilities through our interactive 3D model. Rotate, zoom, and activate various subsystems to see the future of robotics in action.</p>
+                
+                <div class="space-y-6">
+                    <div>
+                        <h4 class="text-xl font-bold text-neon-pink mb-3">MODEL CONTROLS</h4>
+                        <div class="grid grid-cols-3 gap-3">
+                            <button class="cyber-btn py-2 bg-neon-blue/10 border border-neon-blue text-neon-blue rounded">ROTATE</button>
+                            <button class="cyber-btn py-2 bg-neon-blue/10 border border-neon-blue text-neon-blue rounded">ZOOM</button>
+                            <button class="cyber-btn py-2 bg-neon-blue/10 border border-neon-blue text-neon-blue rounded">PAN</button>
+                            <button class="cyber-btn py-2 bg-neon-blue/10 border border-neon-blue text-neon-blue rounded">WIREFRAME</button>
+                            <button class="cyber-btn py-2 bg-neon-blue/10 border border-neon-blue text-neon-blue rounded">MATERIALS</button>
+                            <button class="cyber-btn py-2 bg-neon-blue/10 border border-neon-blue text-neon-blue rounded">ANIMATE</button>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-xl font-bold text-neon-pink mb-3">ACTIVATE SUBSYSTEMS</h4>
+                        <div class="flex flex-wrap gap-3">
+                            <button class="cyber-btn px-4 py-2 bg-neon-blue/20 border border-neon-blue text-neon-blue rounded-full text-sm">OPTICS</button>
+                            <button class="cyber-btn px-4 py-2 bg-neon-blue/20 border border-neon-blue text-neon-blue rounded-full text-sm">AUDIO</button>
+                            <button class="cyber-btn px-4 py-2 bg-neon-blue/20 border border-neon-blue text-neon-blue rounded-full text-sm">MOTORS</button>
+                            <button class="cyber-btn px-4 py-2 bg-neon-blue/20 border border-neon-blue text-neon-blue rounded-full text-sm">SENSORS</button>
+                            <button class="cyber-btn px-4 py-2 bg-neon-blue/20 border border-neon-blue text-neon-blue rounded-full text-sm">COOLING</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-black/50 border-2 border-dashed border-neon-purple/50 rounded-lg h-96 flex items-center justify-center relative overflow-hidden">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-64 h-64 bg-neon-blue/10 rounded-full pulse"></div>
+                </div>
+                <div class="relative z-10 text-center p-8">
+                    <i class="fas fa-robot text-6xl text-neon-blue mb-4"></i>
+                    <h3 class="text-xl font-bold text-neon-pink mb-2">3D MODEL LOADING</h3>
+                    <p class="text-gray-300 mb-4">Initializing quantum render engine...</p>
+                    <div class="w-full bg-gray-800 rounded-full h-2.5">
+                        <div class="progress-bar h-2.5 rounded-full" style="width: 72%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-black/80 border-t border-neon-blue/20 py-12">
+    <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-6 md:mb-0">
+                <h2 class="text-2xl font-bold neon-text">NΞO</h2>
+                <p class="text-gray-400 mt-2">The robo companion</p>
+            </div>
+            
+            <div class="flex space-x-6">
+                <a href="#" class="text-neon-blue hover:text-neon-pink text-xl">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="text-neon-blue hover:text-neon-pink text-xl">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="#" class="text-neon-blue hover:text-neon-pink text-xl">
+                    <i class="fab fa-discord"></i>
+                </a>
+                <a href="#" class="text-neon-blue hover:text-neon-pink text-xl">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="border-t border-neon-blue/10 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <p class="text-gray-500 text-sm mb-4 md:mb-0"></p>
+            <div class="flex space-x-6">
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Music toggle functionality
+        const musicToggle = document.getElementById('musicToggle');
+        const bgMusic = document.getElementById('bgMusic');
+        
+        musicToggle.addEventListener('click', function() {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                musicToggle.innerHTML = '<i class="fas fa-music text-xl"></i>';
+            } else {
+                bgMusic.pause();
+                musicToggle.innerHTML = '<i class="fas fa-volume-mute text-xl"></i>';
+            }
+        });
+        
+        // Auto-play music (with user interaction)
+        document.body.addEventListener('click', function initAudio() {
+            bgMusic.volume = 0.3;
+            bgMusic.play().catch(e => console.log("Auto-play prevented:", e));
+            document.body.removeEventListener('click', initAudio);
+        }, { once: true });
+        
+        // Neo robot animations
+        const neoRobot = document.getElementById('neoRobot');
+        const sections = document.querySelectorAll('.section');
+        
+        // Show Neo initially
+        setTimeout(() => {
+            neoRobot.classList.remove('hidden');
+            neoRobot.classList.add('neo-enter');
+            
+            // After enter animation, do a scan
+            setTimeout(() => {
+                neoRobot.classList.add('neo-scan');
+                
+                // After scan, exit
+                setTimeout(() => {
+                    neoRobot.classList.add('neo-exit');
+                    
+                    // Reset for next appearance
+                    setTimeout(() => {
+                        neoRobot.classList.remove('neo-enter', 'neo-scan', 'neo-exit');
+                        neoRobot.classList.add('hidden');
+                    }, 800);
+                }, 2000);
+            }, 800);
+        }, 1000);
+        
+        // Random Neo appearances on scroll
+        let lastScrollTime = 0;
+        
+        window.addEventListener('scroll', function() {
+            const currentTime = new Date().getTime();
+            
+            // Throttle the scroll events
+            if (currentTime - lastScrollTime > 1000) {
+                lastScrollTime = currentTime;
+                
+                // 30% chance to trigger Neo appearance
+                if (Math.random() < 0.3) {
+                    showNeo();
+                }
+            }
+        });
+        
+        function showNeo() {
+            // Randomly choose a side (left or right)
+            const fromRight = Math.random() > 0.5;
+            
+            // Position Neo off-screen
+            neoRobot.classList.remove('hidden', 'neo-enter', 'neo-scan', 'neo-exit');
+            neoRobot.style.left = fromRight ? '100vw' : '-200px';
+            neoRobot.style.transform = 'none';
+            
+            // Trigger reflow
+            void neoRobot.offsetWidth;
+            
+            // Enter animation
+            neoRobot.classList.add('neo-enter');
+            
+            // After enter, do a scan
+            setTimeout(() => {
+                neoRobot.classList.add('neo-scan');
+                
+                // After scan, exit
+                setTimeout(() => {
+                    neoRobot.classList.add('neo-exit');
+                    
+                    // Reset for next appearance
+                    setTimeout(() => {
+                        neoRobot.classList.remove('neo-enter', 'neo-scan', 'neo-exit');
+                        neoRobot.classList.add('hidden');
+                    }, 800);
+                }, 2000);
+            }, 800);
+        }
+        
+        // Intersection Observer for section animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeIn');
+                }
+            });
+        }, observerOptions);
+        
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    });
+</script>
+
+
+</body>
+</html>
